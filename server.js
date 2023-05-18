@@ -5,13 +5,16 @@ const navigator = require("navigator");
 require("./db");
 require("./models/clientData");
 require("./models/FieldAgent");
+const cors = require("cors");
+
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(bodyParser.json());
+app.use(cors());
 
 const Client = mongoose.model("Client");
 const FieldAgent = mongoose.model("FieldAgent")
