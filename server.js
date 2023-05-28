@@ -64,60 +64,53 @@ app.post("/submitForm", (req, res) => {
                 address: req.body.address,
                 dob: req.body.dob,
                 age: req.body.age,
+
                 IsAddressSame: "",
                 PersonMetName: "",
                 RelationWithApplicant: "",
                 ProvideAddressIfChanged: "",
-                Customer_and_dealer_distance_in_km: "",
-                Customer_phone_number: "",
+
                 Family_income: null,
                 Previous_occupation: "",
+                Occupation: "",
                 Residence_owned_by: "",
                 Rent_amount_if_rented: "",
                 Name_of_landlord_if_rented: "",
                 Tenure_of_stay: "",
+
+
                 Name_plate_seen: "",
                 Name_mentioned_on_plate: "",
                 Floor_number: "",
                 Color_of_building: "",
+
+
                 FamilyCount: null,
                 MartialStatus: "",
                 TypeOfFamily: "",
-                Occupation: "",
                 dependentCount: null,
-                Id_proof_seen: "",
-                Id_proof_type: "",
-                Address_proof_seen: "",
-                Address_proof_type: "",
+
+
+                Id_proof: "",
                 Type_of_house: "",
-                Locality_status: "",
                 Locality_type: "",
                 Furnishing_of_house: "",
-                Area_type: "",
-                Locality_and_residencial_area: "",
+                Area_approx: "",
+                
                 Asset_seen: "",
-                Residence_accessible_by: "",
-                Age_approx: "",
-                Phone_number: "",
-                Address_neighbour: "",
-                Feedback: "",
+
+                tpc: "",
+                nieghbour_additional_detail: "",
+
                 Type_of_veichel: "",
                 Value_of_veichel: "",
                 Manufacturer_name: "",
                 Model: "",
-                Previous_visit_done_on_this_address: "",
-                Number_of_time_visited: "",
-                Person_in_previous_visit: "",
-                Status_of_verifier: "",
-                Verifier_notes: "",
-                remarks: "",
-                Gaurantor_status_of_verifier: "",
-                Gaurantor_verifier_notes: "",
-                Gaurantor_remarks: "",
+
+                Previous_visit: "",
+
                 Status: "",
-                Final_address: "",
-                FI_done_by: "",
-                Final_phone_number: "",
+                data: getCurrentDate(),
                 image: null
     });
     client_insatnce.save()

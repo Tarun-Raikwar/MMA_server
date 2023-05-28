@@ -19,6 +19,7 @@ const ClientSchema = new mongoose.Schema({
     case_no: {
         type: String
     },
+
     IsAddressSame: {
         type: String
     },
@@ -31,19 +32,21 @@ const ClientSchema = new mongoose.Schema({
     ProvideAddressIfChanged: {
         type: String
     },
-    Customer_and_dealer_distance_in_km: {
-        type: String
-    },
-    Customer_phone_number: {
-        type: String
-    },
+
+    
     Family_income: {
         type: String
     },
     Previous_occupation: {
         type: String
     },
+    Occupation: {
+        type: String
+    },
     Residence_owned_by: {
+        type: String
+    },
+    residence: {
         type: String
     },
     Rent_amount_if_rented: {
@@ -55,6 +58,9 @@ const ClientSchema = new mongoose.Schema({
     Tenure_of_stay: {
         type: String
     },
+
+    
+
     Name_plate_seen: {
         type: String
     },
@@ -67,6 +73,9 @@ const ClientSchema = new mongoose.Schema({
     Color_of_building: {
         type: String
     },
+
+
+
     FamilyCount: {
         type: String
     },
@@ -76,28 +85,16 @@ const ClientSchema = new mongoose.Schema({
     TypeOfFamily: {
         type: String
     },
-    Occupation: {
-        type: String
-    },
     dependentCount: {
         type: String
     },
-    Id_proof_seen: {
-        type: String
-    },
-    Id_proof_type: {
-        type: String
-    },
-    Address_proof_seen: {
-        type: String
-    },
-    Address_proof_type: {
+
+
+
+    Id_proof: {
         type: String
     },
     Type_of_house: {
-        type: String
-    },
-    Locality_status: {
         type: String
     },
     Locality_type: {
@@ -106,30 +103,25 @@ const ClientSchema = new mongoose.Schema({
     Furnishing_of_house: {
         type: String
     },
-    Area_type: {
+    Area_approx: {
         type: String
     },
-    Locality_and_residencial_area: {
-        type: String
-    },
+    
+
+
     Asset_seen: {
         type: String
     },
-    Residence_accessible_by: {
+
+
+    tpc: {
         type: String
     },
-    Age_approx: {
+    nieghbour_additional_detail: {
         type: String
-    },
-    Phone_number: {
-        type: String
-    },
-    Address_neighbour: {
-        type: String
-    },
-    Feedback: {
-        type: String
-    },
+    },    
+
+
     Type_of_veichel: {
         type: String
     },
@@ -142,45 +134,27 @@ const ClientSchema = new mongoose.Schema({
     Model: {
         type: String
     },
-    Previous_visit_done_on_this_address: {
+
+
+
+    Previous_visit: {
         type: String
     },
-    Number_of_time_visited: {
-        type: String
-    },
-    Person_in_previous_visit: {
-        type: String
-    },
+
+
     Status_of_verifier: {
         type: String
     },
     Verifier_notes: {
         type: String
     },
-    remarks: {
-        type: String
-    },
-    Gaurantor_status_of_verifier: {
-        type: String
-    },
-    Gaurantor_verifier_notes: {
-        type: String
-    },
-    Gaurantor_remarks: {
-        type: String
-    },
+    
+
     Status: {
         type: String
     },
-    Final_address: {
-        type: String
-    },
-    FI_done_by: {
-        type: String
-    },
-    Final_phone_number: {
-        type: String
-    },
+
+    
     image: {
         type: Array,
         default: []
