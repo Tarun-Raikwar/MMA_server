@@ -58,60 +58,60 @@ app.get("/FieldAgentData", (req, res) => {
 
 app.post("/submitForm", (req, res) => {
     const client_insatnce = new Client({
-                name: req.body.name,
-                fi_type: req.body.fi_type,
-                case_no: req.body.case_no, 
-                address: req.body.address,
-                dob: req.body.dob,
-                age: req.body.age,
+        name: req.body.name,
+        dob: req.body.dob,
+        address: req.body.address,
+        age: req.body.age,
+        fi_type: req.body.fi_type,
+        case_no: req.body.case_no,
 
-                IsAddressSame: "",
-                PersonMetName: "",
-                RelationWithApplicant: "",
-                ProvideAddressIfChanged: "",
+        IsAddressSame: "",
+        PersonMetName: "",
+        RelationWithApplicant: "",
+        ProvideAddressIfChanged: "",
 
-                Family_income: null,
-                Previous_occupation: "",
-                Occupation: "",
-                Residence_owned_by: "",
-                Rent_amount_if_rented: "",
-                Name_of_landlord_if_rented: "",
-                Tenure_of_stay: "",
+        Family_income: "",
+        Previous_occupation: "",
+        Occupation: "",
+        residence: "",
+        Residence_owned_by: "",
+        Rent_amount_if_rented: "",
+        Name_of_landlord_if_rented: "",
+        Tenure_of_stay: "",
 
+        Name_plate_seen: "",
+        Name_mentioned_on_plate: "",
+        Floor_number: "",
+        Color_of_building: "",
 
-                Name_plate_seen: "",
-                Name_mentioned_on_plate: "",
-                Floor_number: "",
-                Color_of_building: "",
+        FamilyCount: "",
+        MartialStatus: "",
+        TypeOfFamily: "",
+        dependentCount: "",
 
+        Id_proof: "",
+        Type_of_house: "",
+        Locality_type: "",
+        Furnishing_of_house: "",
+        Area_approx: "",
 
-                FamilyCount: null,
-                MartialStatus: "",
-                TypeOfFamily: "",
-                dependentCount: null,
+        Asset_seen: "",
 
+        tpc: "",
+        nieghbour_additional_detail: "",
 
-                Id_proof: "",
-                Type_of_house: "",
-                Locality_type: "",
-                Furnishing_of_house: "",
-                Area_approx: "",
-                
-                Asset_seen: "",
+        Type_of_veichel: "",
+        Value_of_veichel: "",
+        Manufacturer_name: "",
+        Model: "",
 
-                tpc: "",
-                nieghbour_additional_detail: "",
+        Previous_visit: "",
 
-                Type_of_veichel: "",
-                Value_of_veichel: "",
-                Manufacturer_name: "",
-                Model: "",
+        Status_of_verifier: "",
+        Verifier_notes: "",
 
-                Previous_visit: "",
-
-                Status: "",
-                data: getCurrentDate(),
-                image: null
+        Status: "",
+        image: null
     });
     client_insatnce.save()
     .then(data => {
