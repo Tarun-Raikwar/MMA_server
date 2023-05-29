@@ -111,6 +111,7 @@ app.post("/submitForm", (req, res) => {
         Verifier_notes: "",
 
         Status: "",
+        date: getCurrentDate(),
         image: null
     });
     client_insatnce.save()
