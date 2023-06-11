@@ -37,6 +37,7 @@ app.get('/', (req, res)=>{
     res.send("hello")
 });
 
+
 app.get("/Admin_data", (req, res) => {
     console.log("get")
     Client.find()
@@ -56,6 +57,9 @@ app.get("/FieldAgentData", (req, res) => {
 
 // ************************ post requests *********************
 
+
+
+// submit initial form trigger only during assigning
 app.post("/submitForm", (req, res) => {
     const client_insatnce = new Client({
         name: req.body.name,
@@ -124,6 +128,9 @@ app.post("/submitForm", (req, res) => {
     })
 })
 
+
+
+// for admin login
 app.post("/loginAdmin", (req, res) => {
     console.log(req.body);
     if(req.body.username === "Bharat" && req.body.password === "Bharat@123"){
@@ -132,10 +139,16 @@ app.post("/loginAdmin", (req, res) => {
     else res.send({status: false});
 })
 
+
+
+
+
+
 const base64_to_binary = (base64String) => {
     return Buffer.from(base64String, 'base64');
-}
+} 
 
+//for update data in form
 app.post("/updateData", (req, res) => {
     
     let imageArray = new Array();
@@ -161,6 +174,13 @@ app.post("/updateData", (req, res) => {
     })
 })
 
+
+
+//update Field agent
+app.post("/updateAgent")
+
+
+//create Field agent account
 app.post("/CreateFieldAgentAccount", (req, res) => {
     console.log(req.body);
     const FieldAgent_instance = new FieldAgent({
@@ -181,9 +201,13 @@ app.post("/CreateFieldAgentAccount", (req, res) => {
     })
 });
 
-app.post("/AssignWork", (req, res) => {
+
+
+
+//for updating internal data of assigning/deleting field agent
+app.post("/updateAgent", (req, res) => {
     console.log(req.body);
-    FieldAgent.updateOne({_id: req.body.agentId}, {$set: {Pending: req.body.PendingWork}})
+    FieldAgent.updateOne({_id: req.body.agentId}, {$set: req.body.update})
     .then(data => {
         console.log(data);
         res.send("true");
@@ -194,6 +218,9 @@ app.post("/AssignWork", (req, res) => {
     })
 })
 
+
+
+//find data from data using mongo ID
 app.post("/findForm", (req, res) => {
     console.log(req.body);
     Client.find({"_id": {$in: req.body}})
@@ -206,6 +233,9 @@ app.post("/findForm", (req, res) => {
     })
 });
 
+
+
+//for login field agent
 app.post("/loginFieldAgent", (req, res) => {
     console.log(req.body);
     FieldAgent.find(req.body)
@@ -219,6 +249,9 @@ app.post("/loginFieldAgent", (req, res) => {
     })
 })
 
+
+
+//for marking pending work to be verified
 app.post("/AgentWorkDone", (req, res) => {
     console.log(req.body)
     FieldAgent.updateOne({_id: req.body.id}, {$set: req.body.update})
@@ -230,7 +263,6 @@ app.post("/AgentWorkDone", (req, res) => {
         console.log(err);
         res.send("false");
     })
-    // res.send(true);
 })
 
 
