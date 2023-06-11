@@ -129,6 +129,20 @@ app.post("/submitForm", (req, res) => {
 })
 
 
+//delete_form
+
+app.post("/delete_form", (req, res) => {
+    console.log(req.body);
+    Client.deleteOne({_id : req.body})
+    .then(data => {
+        res.send({"status": true});
+    })
+    .catch(err => {
+        res.send({"status": false, "error": err});
+    })
+})
+
+
 
 // for admin login
 app.post("/loginAdmin", (req, res) => {
