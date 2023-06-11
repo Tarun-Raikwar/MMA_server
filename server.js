@@ -133,7 +133,7 @@ app.post("/submitForm", (req, res) => {
 
 app.post("/delete_form", (req, res) => {
     console.log(req.body);
-    Client.deleteOne({_id : req.body})
+    Client.deleteOne({_id : req.body.id})
     .then(data => {
         res.send({"status": true});
     })
@@ -190,8 +190,6 @@ app.post("/updateData", (req, res) => {
 
 
 
-//update Field agent
-app.post("/updateAgent")
 
 
 //create Field agent account
