@@ -53,71 +53,9 @@ app.get("/FieldAgentData", (req, res) => {
 
 // submit initial form trigger only during assigning
 app.post("/submitForm", (req, res) => {
-    const client_insatnce = new Client({
-        name: req.body.name,
-        dob: req.body.dob,
-        address: req.body.address,
-        age: req.body.age,
-        fi_type: req.body.fi_type,
-        case_no: req.body.case_no,
-
-        IsAddressSame: "",
-        PersonMetName: "",
-        RelationWithApplicant: "",
-        ProvideAddressIfChanged: "",
-
-        Family_income: "",
-        Previous_occupation: "",
-        Occupation: "",
-        residence: "",
-        Residence_owned_by: "",
-        Rent_amount_if_rented: "",
-        Name_of_landlord_if_rented: "",
-        Tenure_of_stay: "",
-
-        Name_plate_seen: "",
-        Name_mentioned_on_plate: "",
-        Floor_number: "",
-        Color_of_building: "",
-
-        FamilyCount: "",
-        MartialStatus: "",
-        TypeOfFamily: "",
-        dependentCount: "",
-
-        Id_proof: "",
-        Type_of_house: "",
-        Locality_type: "",
-        Furnishing_of_house: "",
-        Area_approx: "",
-
-        Asset_seen: "",
-
-        tpc: "",
-        nieghbour_additional_detail: "",
-
-        Type_of_veichel: "",
-        Value_of_veichel: "",
-        Manufacturer_name: "",
-        Model: "",
-
-        Previous_visit: "",
-
-        Status_of_verifier: "",
-        Verifier_notes: "",
-
-        Status: "",
-        date: getCurrentDate(),
-        image: null
-    });
-    client_insatnce.save()
-    .then(data => {
-        res.send({status: true, id: data._id});
-    })
-    .catch(err => {
-        console.log(err);
-        res.send({status: false});
-    })
+    Client.insertMany(req.body)
+    .then(data => console.log(data))
+    .catch(err => console.log(err))
 })
 
 
