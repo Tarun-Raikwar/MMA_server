@@ -54,8 +54,11 @@ app.get("/FieldAgentData", (req, res) => {
 // submit initial form trigger only during assigning
 app.post("/submitForm", (req, res) => {
     Client.insertMany(req.body)
-    .then(data => console.log(data))
+    .then(data => {
+        console.log(data);
+    })
     .catch(err => console.log(err))
+    res.send("true");
 })
 
 
