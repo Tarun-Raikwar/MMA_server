@@ -154,7 +154,7 @@ app.post("/CreateFieldAgentAccount", (req, res) => {
 //for updating internal data of assigning/deleting field agent
 app.post("/updateAgent", (req, res) => {
     console.log(req.body);
-    FieldAgent.updateOne({_id: req.body.agentId}, {$set: req.body.update})
+    FieldAgent.updateOne(req.body.agentId, {$set: req.body.update})
     .then(data => {
         console.log(data);
         res.send("true");
