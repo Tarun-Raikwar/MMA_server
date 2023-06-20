@@ -55,10 +55,12 @@ app.get("/FieldAgentData", (req, res) => {
 app.post("/submitForm", (req, res) => {
     Client.insertMany(req.body)
     .then(data => {
-        console.log(data);
+        res.send(data);
     })
-    .catch(err => console.log(err))
-    res.send("true");
+    .catch(err => {
+        console.log(err);
+        res.send("server error");
+    })
 })
 
 
