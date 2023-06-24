@@ -162,6 +162,9 @@ const ClientSchema = new mongoose.Schema({
     date: {
         type: String
     },
+    remarks: {
+        type: String
+    },
     location: {
         type: String
     }
