@@ -1,3 +1,4 @@
+// set dependencies
 const express = require("express");
 const bodyParser = require("body-parser");
 const { default: mongoose } = require("mongoose");
@@ -5,24 +6,35 @@ const navigator = require("navigator");
 require("./db");
 require("./models/clientData");
 require("./models/FieldAgent");
+require("dotenv").config();
 const cors = require("cors");
 
 
+//create express app
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// getting collections
+const Client = mongoose.model("Client");
+const FieldAgent = mongoose.model("FieldAgent");
+
+
+// setting middleWares
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(bodyParser.json());
 app.use(cors());
 
-const Client = mongoose.model("Client");
-const FieldAgent = mongoose.model("FieldAgent")
+app.use((req, res, next) => {
+    if(req.body.Credentials && req.body.Credentials.username == process.env.Admin_username && req.body.Credentials.password == process.env.Admin_password){
+        req.body = req.body.data;
+        next();
+    }
+    else{
+        res.send({status: false});
+    }
+});
 
-
-const getCurrentDate = ()=>{
-    return new Date();
-}
 
 // *********************** get requests *************************
 app.get('/', (req, res)=>{
@@ -31,7 +43,6 @@ app.get('/', (req, res)=>{
 
 
 app.get("/Admin_data", (req, res) => {
-    console.log("get")
     Client.find()
     .then(data => {
         console.log("fetched")
@@ -40,7 +51,7 @@ app.get("/Admin_data", (req, res) => {
     .catch(err => res.send(false))
 })
 
-app.get("/FieldAgentData", (req, res) => {
+app.post("/FieldAgentData", (req, res) => {
     FieldAgent.find()
     .then(data => res.send(data))
     .catch(err => res.send(false))
@@ -67,7 +78,6 @@ app.post("/submitForm", (req, res) => {
 //delete_form
 
 app.post("/delete_form", (req, res) => {
-    console.log(req.body);
     Client.deleteOne({_id : req.body.id})
     .then(data => {
         res.send({"status": true});
@@ -81,11 +91,7 @@ app.post("/delete_form", (req, res) => {
 
 // for admin login
 app.post("/loginAdmin", (req, res) => {
-    console.log(req.body);
-    if(req.body.username === "Bharat" && req.body.password === "Bharat@123"){
-        res.send({status: true});
-    }
-    else res.send({status: false});
+    res.send({status: true});
 })
 
 
@@ -110,11 +116,10 @@ app.post("/updateData", (req, res) => {
     }
 
     if(imageArray.length > 0) req.body.image = imageArray;
-    console.log(req.body.image);
+    
 
     Client.updateOne({_id: req.body.id}, {$set: req.body.update})
     .then(updatRes => {
-        console.log(updatRes);
         res.send({status: true});
     })
     .catch(err => {
@@ -129,7 +134,6 @@ app.post("/updateData", (req, res) => {
 
 //create Field agent account
 app.post("/CreateFieldAgentAccount", (req, res) => {
-    console.log(req.body);
     const FieldAgent_instance = new FieldAgent({
         Name: req.body.Name,
         DOB: req.body.DOB,
@@ -139,7 +143,6 @@ app.post("/CreateFieldAgentAccount", (req, res) => {
     })
     FieldAgent_instance.save()
     .then(data => {
-        console.log(data);
         res.send("true");
     })
     .catch(err => {
@@ -153,10 +156,8 @@ app.post("/CreateFieldAgentAccount", (req, res) => {
 
 //for updating internal data of assigning/deleting field agent
 app.post("/updateAgent", (req, res) => {
-    console.log(req.body);
     FieldAgent.updateOne(req.body.agentId, {$set: req.body.update})
     .then(data => {
-        console.log(data);
         res.send("true");
     })
     .catch(err => {
@@ -169,10 +170,8 @@ app.post("/updateAgent", (req, res) => {
 
 //find data from data using mongo ID
 app.post("/findForm", (req, res) => {
-    console.log(req.body);
     Client.find({"_id": {$in: req.body}})
     .then(data => {
-        // console.log(data);
         res.send({status: true, fetchedData: data});
     })
     .catch(err => {
@@ -184,7 +183,6 @@ app.post("/findForm", (req, res) => {
 
 //for login field agent
 app.post("/loginFieldAgent", (req, res) => {
-    console.log(req.body);
     FieldAgent.find(req.body)
     .then(data => {
         if(data.length == 0) res.send({status: false});
@@ -200,10 +198,8 @@ app.post("/loginFieldAgent", (req, res) => {
 
 //for marking pending work to be verified
 app.post("/AgentWorkDone", (req, res) => {
-    console.log(req.body)
     FieldAgent.updateOne({_id: req.body.id}, {$set: req.body.update})
     .then(data => {
-        console.log(data);
         res.send("true");
     })
     .catch(err => {
