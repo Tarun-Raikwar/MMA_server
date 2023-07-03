@@ -26,7 +26,22 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use((req, res, next) => {
-    if(req.body.Credentials && req.body.Credentials.username == process.env.Admin_username && req.body.Credentials.password == process.env.Admin_password){
+    if(req.body.agent){
+        console.log(req.body);
+        FieldAgent.find(req.body.agent)
+        .then(data => {
+            if(data.length == 0) res.send({status: false});
+            else{
+                req.body = req.body.data;
+                next();
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.send({status: false});
+        })
+    }
+    else if(req.body.Credentials && req.body.Credentials.username == process.env.Admin_username && req.body.Credentials.password == process.env.Admin_password){
         req.body = req.body.data;
         next();
     }
@@ -170,6 +185,8 @@ app.post("/updateAgent", (req, res) => {
 
 //find data from data using mongo ID
 app.post("/findForm", (req, res) => {
+    console.log("tarun")
+    console.log(req.body);
     Client.find({"_id": {$in: req.body}})
     .then(data => {
         res.send({status: true, fetchedData: data});
